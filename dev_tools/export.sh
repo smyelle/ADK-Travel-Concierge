@@ -34,16 +34,25 @@ fi
 echo "Exporting project code structure to ${OUTPUT_FILE}..."
 
 find . \( \
-    -path ./venv -o \
-    -path ./.git -o \
-    -path ./web-app/node_modules -o \
-    -path ./web-app/build -o \
-    -path ./.vscode \
+    -name ".git" -o \
+    -name ".venv" -o \
+    -name "venv" -o \
+    -name ".vscode" -o \
+    -name ".idea" -o \
+    -name "__pycache__" -o \
+    -path "./web-app/node_modules" -o \
+    -path "./web-app/build" \
 \) -prune -o \
 -type f \
 -not -name "*.png" \
+-not -name "*.jpg" \
+-not -name "*.jpeg" \
 -not -name "*.ico" \
+-not -name "*.pyc" \
 -not -name ".DS_Store" \
+-not -name "uv.lock" \
+-not -name "poetry.lock" \
+-not -name "package-lock.json" \
 -not -name "project_export.txt" \
 -print | while read -r filepath; do
     echo "Appending code file: ${filepath}"
